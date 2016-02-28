@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+	<context:component-scan base-package="com.solveast.muleteer">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="andy" authorities="admin" password="andy" />
+				<security:user name="igor" authorities="admin" password="igor" />
+				<security:user name="bo" authorities="admin" password="bo" />
+				<security:user name="admin" authorities="admin" password="1khdHHg274" />
+				<security:user name="user1" authorities="user" password="dfjh12jj" />
+				<security:user name="user2" authorities="user" password="qw76hrty" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	<security:http use-expressions="true">
+		<security:intercept-url pattern="/static/**" access="permitAll" />
+		<security:intercept-url pattern="/tracking/*" access="permitAll" />
+		<security:intercept-url pattern="*/tracking/*" access="permitAll" />
+		
+		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/get-markers" access="permitAll" />
+		<security:intercept-url pattern="/get-mules" access="permitAll" />
+		
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+
+	 	<security:form-login login-page="/login" authentication-failure-url="/login.jsp?error=true" />
+
+		<security:logout logout-url="/logout" logout-success-url="/" />
+
+	 	<security:csrf disabled="true"/>
+	
+		<security:form-login />
+	</security:http>
+
+	<jdbc:embedded-database type="HSQL" id="dataSource" />
+
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="com.solveast.muleteer.model" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+		<property name="persistenceProvider">
+			<bean class="org.hibernate.jpa.HibernatePersistenceProvider"></bean>
+		</property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<jpa:repositories base-package="com.solveast.muleteer.repositories" 
+		entity-manager-factory-ref="emf" transaction-manager-ref="transactionManager"
+		/> 
+</beans>
