@@ -19,6 +19,10 @@
 <script type="text/javascript" src="${classyqrJs}"></script>
 <link rel="stylesheet" type="text/css" href="${mainCss}" />
 
+<link rel="icon" 
+      type="image/png" 
+      href="http://www.favicon.cc/logo3d/152571.png">
+
 <script type="text/javascript">
 //	var muleNumber;
 //	var muleURL;

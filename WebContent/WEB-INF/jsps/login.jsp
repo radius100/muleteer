@@ -12,6 +12,10 @@
 <link rel="stylesheet" type="text/css" href="${bootstrapCss}" />
 <link rel="stylesheet" type="text/css" href="${signinCss}" />
 
+<link rel="icon" 
+      type="image/png" 
+      href="<spring:url value="/static/images/favicon.png" />">
+
 </head>
 <body>
 	<div class="container">

@@ -19,6 +19,10 @@
 <link rel="stylesheet" type="text/css" href="${bootstrapThemeCss}" />
 <link rel="stylesheet" type="text/css" href="${mainCss}" />
 
+<link rel="icon" 
+      type="image/png" 
+      href="<spring:url value="/static/images/favicon.png" />">
+
 <script type="text/javascript" src="${jqueryJs}"></script>
 <script type="text/javascript" src="${bootstrapJs}"></script>
 
@@ -61,8 +65,8 @@ body {
 	</nav>
 	<div class="row">
 		<div class="col-xs-4">
-		<h4>Logs will be clean at midnight</h4>
-			total lines: ${total}
+		<h4>Logs will be cleaned at midnight</h4>
+			Total lines: ${total}
 		</div>
 		<div class="col-xs-8">
 			<table class="table">

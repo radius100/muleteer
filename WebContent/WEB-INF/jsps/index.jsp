@@ -23,6 +23,10 @@
 <link rel="stylesheet" type="text/css" href="${bootstrapCss}" />
 <link rel="stylesheet" type="text/css" href="${bootstrapThemeCss}" />
 
+<link rel="icon" 
+      type="image/png" 
+      href="<spring:url value="/static/images/favicon.png" />">
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCZD9ucMQ4k0pnOFxE7lzgoVI2z_WC24w&signed_in=true&callback=initMap" async defer></script>
 
 <style type="text/css">

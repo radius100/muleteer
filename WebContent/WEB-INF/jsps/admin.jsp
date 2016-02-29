@@ -21,6 +21,10 @@
 <link rel="stylesheet" type="text/css" href="${bootstrapThemeCss}" />
 <link rel="stylesheet" type="text/css" href="${mainCss}" />
 
+<link rel="icon" 
+      type="image/png" 
+      href="<spring:url value="/static/images/favicon.png" />">
+
 <script type="text/javascript" src="${jqueryJs}"></script>
 <script type="text/javascript" src="${bootstrapJs}"></script>
 <script type="text/javascript" src="${classyqrJs}"></script>
